@@ -1,0 +1,8 @@
+{
+  "Name": "artist_face",
+  "MenuName": "Artist Face",
+  "Layer": "Face",
+  "Races": [
+    "Human"
+  ]
+}
