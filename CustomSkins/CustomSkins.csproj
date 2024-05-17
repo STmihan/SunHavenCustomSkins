@@ -80,6 +80,9 @@
     <Reference Include="System.Xml.Linq">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\System.Xml.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>$(SunHaven)\Sun Haven_Data\Managed\Unity.Addressables.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>

@@ -22,9 +22,6 @@ public class Plugin : BaseUnityPlugin
 
     public static ManualLogSource Log;
 
-    public static readonly List<ClothingLayerData> Customs = new();
-    public static readonly List<ClothingChangeable> ItemsToRegister = new();
-
     private void Awake()
     {
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
@@ -33,6 +30,5 @@ public class Plugin : BaseUnityPlugin
         harmony.PatchAll(typeof(ClothingLayerDataPatch));
         Log = Logger;
 
-        ItemsToRegister.AddRange(PluginConfig.Register());
     }
 }
