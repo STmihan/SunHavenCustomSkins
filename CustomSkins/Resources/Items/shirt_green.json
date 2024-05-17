@@ -1,0 +1,12 @@
+{
+  "SpriteInheritance": "chest_bird_shirt_green",
+  "Name": "shirt_green",
+  "MenuName": "Shirt",
+  "Layers": [
+    "Chest",
+    "FrontSleeves"
+  ],
+  "Races": [
+    "Human"
+  ]
+}
