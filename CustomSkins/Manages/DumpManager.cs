@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Wish;
 
@@ -10,7 +11,8 @@ public static class DumpManager
 {
     public static void DumpCharacterClothingStyles()
     {
-        const string path = @"D:\PetProjects\SunHavenCustomSkins\items.log";
+#if DEBUG
+        string path = Path.Combine(Assembly.GetCallingAssembly().Location, "items.log");
         StringBuilder builder = new StringBuilder();
         foreach (ClothingLayerData data in CharacterClothingStyles.AllClothing.Where(c => c.availableAtCharacterSelect))
         {
@@ -21,11 +23,13 @@ public static class DumpManager
 
         File.WriteAllText(path, builder.ToString());
         Plugin.Log.LogInfo($"Done logging items. Log in {path}");
+#endif
     }
 
     public static void DumpAvailableItemDb()
     {
-        const string path = @"D:\PetProjects\SunHavenCustomSkins\items.db";
+#if DEBUG
+        string path = Path.Combine(Assembly.GetCallingAssembly().Location, "items.log");
         StringBuilder builder = new StringBuilder();
         IEnumerable<ClothingLayerData> list = CharacterClothingStyles
             .AllClothing
@@ -44,5 +48,6 @@ public static class DumpManager
 
         File.WriteAllText(path, builder.ToString());
         Plugin.Log.LogInfo($"Done logging items. Log in {path}");
+#endif
     }
 }
