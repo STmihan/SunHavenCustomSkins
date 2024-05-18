@@ -26,9 +26,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Reference Include="ConfigurationManager">
-      <HintPath>Resources\External\ConfigurationManager\ConfigurationManager.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Resources\External\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>

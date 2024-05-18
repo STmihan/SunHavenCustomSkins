@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿// #define DUMP
+#if DEBUG && DUMP
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using Wish;
+#endif
 
 namespace CustomSkins.Manages;
 
@@ -11,7 +14,7 @@ public static class DumpManager
 {
     public static void DumpCharacterClothingStyles()
     {
-#if DEBUG
+#if DEBUG && DUMP
         string path = Path.Combine(Assembly.GetCallingAssembly().Location, "items.log");
         StringBuilder builder = new StringBuilder();
         foreach (ClothingLayerData data in CharacterClothingStyles.AllClothing.Where(c => c.availableAtCharacterSelect))
@@ -28,7 +31,7 @@ public static class DumpManager
 
     public static void DumpAvailableItemDb()
     {
-#if DEBUG
+#if DEBUG && DUMP
         string path = Path.Combine(Assembly.GetCallingAssembly().Location, "items.log");
         StringBuilder builder = new StringBuilder();
         IEnumerable<ClothingLayerData> list = CharacterClothingStyles
