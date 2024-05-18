@@ -6,12 +6,12 @@ setx SunHaven "%shpath%" /m || goto :error
 
 echo Done!
 echo SunHaven environment variable set to %shpath%
-echo You can close this window (ESC)
+echo You can close this window "ESC"
 PAUSE >nul
 exit 0
 
 :error
 echo Something went wrong
-echo You can close this window (ESC)
+echo You can close this window "ESC"
 PAUSE >nul
-exit 0
+exit 1
