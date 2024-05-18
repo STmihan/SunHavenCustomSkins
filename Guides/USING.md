@@ -1,5 +1,3 @@
-﻿Here is the translation of the guide from Russian to English:
-
 ### Installation
 
 - Install [BepInEx 5](https://github.com/BepInEx/BepInEx) on Sun Haven (just unpack all files from the archive into the game
