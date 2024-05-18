@@ -1,11 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
 using Wish;
+using Object = UnityEngine.Object;
 
 namespace CustomSkins.Manages;
+
+public class SearchResult
+{
+    public Texture2D Texture { get; set; }
+    public string Name { get; set; }
+    public string MenuName { get; set; }
+    public List<ClothingLayer> Layers { get; set; }
+}
 
 public static class ItemsManager
 {
@@ -15,14 +28,84 @@ public static class ItemsManager
     public static void RegisterItems()
     {
         ItemsToRegister.AddRange(PluginConfig.Register());
-        
+
         foreach (ClothingChangeable data in ItemsToRegister)
         {
             ClothingLayerData item = CreateNewClothingData(data);
             RegisterNewItem(item);
         }
     }
-    
+
+    public static async Task<SearchResult> SearchForItem(string menuName)
+    {
+        ClothingLayerData result = CharacterClothingStyles
+            .AllClothing
+            .FirstOrDefault(c => c.menuName.Contains(menuName));
+        if (result == null) return null;
+        var tsc = new TaskCompletionSource<Texture2D>();
+
+        result.LoadClothingSprites(layer =>
+        {
+            try
+            {
+                Texture2D tex = layer._clothingLayerInfo[0].sprites[0].texture;
+                tsc.SetResult(tex);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError(e.Message);
+                tsc.SetResult(null);
+            }
+        });
+        Texture2D texture2D = await tsc.Task;
+        return new SearchResult
+        {
+            Name = result.name,
+            MenuName = result.menuName,
+            Texture = texture2D,
+            Layers = result.clothingLayers,
+        };
+    }
+
+    public static async void SearchItemDrawer(ConfigEntryBase entry)
+    {
+        string value = entry.BoxedValue as string;
+        GUILayout.BeginVertical();
+        entry.SetSerializedValue(GUILayout.TextField(value));
+        if (value != null && value.Length >= 3)
+        {
+            SearchResult found = await SearchForItem(value);
+            if (found != null)
+            {
+                GUILayout.BeginVertical();
+                GUILayout.Box(found.Texture, GUILayout.MaxWidth(270));
+                GUILayout.Label("MenuName: " + found.MenuName);
+                GUILayout.Label("Name: " + found.Name);
+                GUILayout.Label("Layers: " + string.Join(",", found.Layers));
+                if (GUILayout.Button("Save"))
+                {
+                    var path = Path.Combine(Application.persistentDataPath, "textures", $"{found.Texture.name}.png");
+                    var directoryName = Path.GetDirectoryName(path);
+                    if (directoryName != null)
+                    {
+                        Directory.CreateDirectory(directoryName);
+                        var png = found.Texture.EncodeToPNG();
+                        File.WriteAllBytes(path, png);
+                        Application.OpenURL($"file://{directoryName}");
+                    }
+                }
+
+                GUILayout.EndVertical();
+            }
+            else
+            {
+                GUILayout.Label($"Not found: {value}");
+            }
+        }
+
+        GUILayout.EndVertical();
+    }
+
     private static ClothingLayerData CreateNewClothingData(ClothingChangeable data)
     {
         ClothingLayerData inh = CharacterClothingStyles.AllClothing.First(c => c.name == data.SpriteInheritance);

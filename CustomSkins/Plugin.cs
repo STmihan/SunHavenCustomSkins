@@ -1,13 +1,13 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
+using CustomSkins.Manages;
 using CustomSkins.Patches;
 using HarmonyLib;
-using Wish;
 
 namespace CustomSkins;
 
@@ -29,6 +29,15 @@ public class Plugin : BaseUnityPlugin
         harmony.PatchAll(typeof(CharacterClothingStylesPatch));
         harmony.PatchAll(typeof(ClothingLayerDataPatch));
         Log = Logger;
-
+        
+        Config.Bind("Section",
+            "Search for item",
+            string.Empty,
+            new ConfigDescription(
+                "Search for item",
+                null,
+                new ConfigurationManagerAttributes { CustomDrawer = ItemsManager.SearchItemDrawer }
+            )
+        );
     }
 }
