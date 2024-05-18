@@ -8,9 +8,10 @@ namespace CustomSkins;
 [JsonObject]
 public class ClothingChangeable
 {
+    public string SpriteInheritance { get; set; }
     public string Name { get; set; }
     public string MenuName { get; set; }
-    public ClothingLayer Layer { get; set; }
+    public List<ClothingLayer> Layers { get; set; }
 
     [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
     public List<Race> Races { get; set; } = new()
@@ -23,12 +24,10 @@ public class ClothingChangeable
         Race.Angel,
         Race.Demon,
     };
-    
-    public bool AvailableInMenu { get; set; } = true;
 
     public override string ToString()
     {
-        return $"{Name} ({MenuName}) - {Layer} - {string.Join(",", Races)} - In menu: {AvailableInMenu}";
+        return $"{Name} ({MenuName}) - {string.Join(",", Layers)} - {string.Join(",", Races)} - From: {SpriteInheritance}";
     }
 }
 

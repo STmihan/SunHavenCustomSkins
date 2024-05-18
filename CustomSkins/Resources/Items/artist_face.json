@@ -1,7 +1,10 @@
 {
+  "SpriteInheritance": "Player_Facial_Accessories_Miscs_nosebandage_blue",
   "Name": "artist_face",
   "MenuName": "Artist Face",
-  "Layer": "Face",
+  "Layers": [
+    "Face"
+  ],
   "Races": [
     "Human"
   ]

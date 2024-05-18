@@ -26,11 +26,11 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Resources\External\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\mscorlib.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Resources\External\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SunHaven.Core">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\SunHaven.Core.dll</HintPath>
@@ -80,6 +80,9 @@
     <Reference Include="System.Xml.Linq">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\System.Xml.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>$(SunHaven)\Sun Haven_Data\Managed\Unity.Addressables.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
@@ -88,6 +91,9 @@
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>$(SunHaven)\Sun Haven_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(SunHaven)\Sun Haven_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   
