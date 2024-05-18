@@ -4,16 +4,12 @@ Mod for creating custom skins in [Sun Haven](https://store.steampowered.com/app/
 
 # Using
 
-TODO
+ - [Using in English](Guides/USING.md)
+ - [Using in Russian](Guides/USING.ru.md)
 
 # Building
 
-Run setenv.bat **WITH THE ADMINISTRATOR PRIVILEGES** 
-
-or set `SunHaven` environment variable to the Sun Haven full path by yourself
-```shell
-./setenv.bat
-```
+[Building guide](Guides/BUILDING.md)
 
 # Licence
 
